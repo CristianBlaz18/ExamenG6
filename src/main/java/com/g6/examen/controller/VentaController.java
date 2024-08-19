@@ -76,8 +76,12 @@ public class VentaController {
         return ResponseEntity.ok(ventaRepository.findAll());
     }
 
-    @GetMapping("/listarVentasCliente/{id}")
-    public ResponseEntity<?> listarVentasCliente(@PathVariable("id") Long id){
-        return new ResponseEntity<>(ventaRepository.findByClienteNative(id),HttpStatus.OK);
+    @GetMapping("/clientejpql/{clienteId}")
+    public ResponseEntity<?> listarVentasClienteJPQL(@PathVariable("clienteId") Long clienteId) {
+        return new ResponseEntity<>(ventaRepository.findVentasByClienteIdJPQL(clienteId), HttpStatus.OK);
+    }
+    @GetMapping("/clientenative/{clienteId}")
+    public ResponseEntity<?> listarVentasClienteNative(@PathVariable("clienteId") Long clienteId) {
+        return new ResponseEntity<>(ventaRepository.findVentasByClienteIdNative(clienteId), HttpStatus.OK);
     }
 }
